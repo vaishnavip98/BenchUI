@@ -1,0 +1,31 @@
+.bench{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.page{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+.main-table {
+    overflow-x: scroll;
+}
+.card {
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px rgb(1 41 112 / 12%);
+}
+
+.card-body {
+    padding: 10px 10px;
+}
+
+
+.table  {
+    border-bottom: solid 1px #e8eef3 !important;
+    width:100%;
+}
+

@@ -1,0 +1,204 @@
+<!--Add Resource Button-->
+<div class="bench mt-4">
+    <div class="col-sm-6">
+        <h1>Bench</h1>
+    </div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addResource">
+        Add Bench
+    </button>
+</div>
+<!-- Add Resource Modal -->
+<form #form="ngForm">
+    <div class="modal fade" id="addResource" tabindex="-1" aria-labelledby="addResource" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addResourceLabel">Add Resource</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Partner</label>
+                        <select id="partnerId" [(ngModel)]="addBenchRequest.partnerId" name="partnerId" required="true">
+                            <option value="{{partner.partnerId}}" *ngFor="let partner of partnerList">
+                                {{partner.partnerName}} </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="NoOfResource">No. Of Resource</label>
+                        <input class="form-control form-control-lg" type="text" id="noOfResource"
+                            [(ngModel)]="addBenchRequest.noOfResource" name="noOfResource" required="true" >
+                    </div>
+                    <div class="form-group">
+                        <label for="SkillSet">Skill Set</label>
+                        <input class="form-control form-control-lg" type="text" id="skillSet"
+                            [(ngModel)]="addBenchRequest.skillSet" name="skillSet" required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="YearsOfExperince">Years Of Experince</label>
+                        <input class="form-control form-control-lg" type="text" id="yearsOfExperince"
+                            [(ngModel)]="addBenchRequest.yearsOfExperince" name="yearsOfExperince" required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="RatePerHrUSD">Rate Card ($)</label>
+                        <input class="form-control form-control-lg" type="text" id="ratePerHrUSD"
+                            [(ngModel)]="addBenchRequest.ratePerHrUSD" name="ratePerHrUSD" required="true">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button (click)="addBench()" class="btn btn-primary btnSubmit" data-bs-dismiss="modal"
+                        data-bs-toggle="modal" data-bs-target="">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--Edit Bench Modal-->
+<form #form="ngForm">
+    <div class="modal fade" id="editResource" tabindex="-1" aria-labelledby="editResource" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editResourceLabel">Edit Resource</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label class="form-label">Partner</label>
+                        <select id="partnerId" [(ngModel)]="selectedBench.partnerId" name="partnerId">
+                            <option value="{{partner.partnerId}}" *ngFor="let partner of partnerList">
+                                {{partner.partnerName}} </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="NoOfResource">No. Of Resource</label>
+                        <input class="form-control form-control-lg" type="text" id="NoOfResource"
+                            [(ngModel)]="selectedBench.noOfResource" name="NoOfResource"  required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="SkillSet">Skill Set</label>
+                        <input class="form-control form-control-lg" type="text" id="SkillSet"
+                            [(ngModel)]="selectedBench.skillSet" name="SkillSet">
+                    </div>
+                    <div class="form-group">
+                        <label for="YearsOfExperince">Years Of Experince</label>
+                        <input class="form-control form-control-lg" type="text" id="YearsOfExperince"
+                            [(ngModel)]="selectedBench.yearsOfExperince" name="YearsOfExperince">
+                    </div>
+                    <div class="form-group">
+                        <label for="RatePerHrUSD">Rate Card ($)</label>
+                        <input class="form-control form-control-lg" type="text" id="RatePerHrUSD"
+                            [(ngModel)]="selectedBench.ratePerHrUSD" name="RatePerHrUSD">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button (click)="updateBench()" class="btn btn-primary btnSubmit" data-bs-dismiss="modal"
+                        data-bs-toggle="modal" data-bs-target="">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- Delete Resource Confirmation Modal -->
+<form #form="ngForm">
+    <div class="modal fade" id="deleteResource" tabindex="-1" aria-labelledby="deleteResource" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteResourceLabel">Add Resource</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">  
+                    <p>Are you sure to delete this?</p>   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button  (click)="deleteBench()" class="btn btn-primary btnSubmit" data-bs-dismiss="modal"
+                        data-bs-toggle="modal" data-bs-target="">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--Show List Of Entries & Search-->
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-body">
+            <div class="navbar navbar-white bg-white">
+                <div class="container-fluid">
+                    <p>Show
+                        <select [(ngModel)]="length">
+                            <option>10</option>
+                            <option>25</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                        entries
+                    </p>
+                    <form #addressForm="ngForm" class="d-flex">
+                        <input [(ngModel)]="searchValue" (ngModelChange)="searchBench()" name="searchValue"
+                            #it="ngModel" class="form-control me-2" type="search" placeholder="Search"
+                            aria-label="Search">
+                    </form>
+                </div>
+            </div>
+            <!--Admin Bench Table-->
+            <section class="section">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Partner</th>
+                                        <th>No. of Resource</th>
+                                        <th>Skillset</th>
+                                        <th>Years Of Experince</th>
+                                        <th>Rate Card ($)</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let bench of benchs">
+                                        <td>{{bench.benchName}}</td>
+                                        <td>{{bench.noOfResource}}</td>
+                                        <td>{{bench.skillSet}}</td>
+                                        <td>{{bench.yearsOfExperince}}</td>
+                                        <td>{{bench.ratePerHrUSD}}</td>
+                                        <!--Edit & Delete Button-->
+                                        <td>
+                                            <a class="me-3" data-bs-toggle="modal" data-bs-target="#editResource"
+                                                (click)="editBench(bench)">
+                                                <i class="bi bi-pencil-square" data-toggle="tooltip"
+                                                    title="Edit"></i></a>
+                                            <a class="me-3" (click)="setDeleteId(bench.benchId)" data-bs-toggle="modal" data-bs-target="#deleteResource"
+                                               >
+                                                <i class="bi text-danger bi-trash" data-toggle="tooltip"
+                                                    title="Delete"></i></a>
+                                            <!-- <a href="" (click)="deleteBench(bench.benchId)" class="me-3 text-danger"
+                                                data-bs-toggle="modal">
+                                                <i class="bi bi-trash"></i></a> -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>  
+                            <!--Pagination-->
+                            <div class="navbar navbar-white bg-white m-0 b-0">
+                                <div class="container-fluid m-0 b-0">
+                                    <p>Showing 1 to 1 of 1 entries</p>
+                                    <ul class="pagination d-flex">
+                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
